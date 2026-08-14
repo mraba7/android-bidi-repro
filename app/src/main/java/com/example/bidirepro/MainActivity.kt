@@ -108,6 +108,19 @@ private fun ComposeSection(
             )
         }
 
+        // Sanity control. TextDirection.Ltr is unambiguous, so this row MUST render
+        // as an LTR paragraph. If it does, the harness is capable of showing the
+        // difference — which makes the default row above rendering RTL a real
+        // result rather than a flaw in this test.
+        Label("Latin-first + TextStyle(textDirection = TextDirection.Ltr) — CONTROL: must flip")
+        Sample {
+            M3Text(
+                longLatinFirst,
+                fontSize = 16.sp,
+                style = TextStyle(textDirection = TextDirection.Ltr)
+            )
+        }
+
         Label("BasicTextField, Latin-first, default — DEFECT (tap at the end and compare caret side)")
         var a by remember { mutableStateOf(shortLatinFirst) }
         Sample {
