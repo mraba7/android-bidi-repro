@@ -38,6 +38,13 @@ Arabic word `شركة`:
 The first strong character is the only variable. Everything else — widget, theme,
 layout, layout direction, font, text size — is held constant.
 
+> **The table above is itself an instance of the bug.** GitHub renders `<code>`
+> spans with first-strong resolution, so the Arabic-first row places its leading
+> word `شركة` at the right edge, where the first word of an Arabic sentence
+> belongs — while the Latin-first row pushes `DHL` to the far left, even though
+> `DHL` is likewise the first word. Same two strings, same renderer, opposite
+> paragraph direction, one leading character apart.
+
 ## Sections
 
 Each section renders three rows: Arabic-first (correct), Latin-first (defect), and
