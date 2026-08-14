@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF5F5F5">
+
+    <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            style="@style/Note"
+            android:text="This screen forces layoutDirection = RTL on the root view, which is exactly what an Arabic system locale does. No locale change is needed to reproduce. Every pair below differs ONLY by the leading Arabic word 'شركة'." />
+
+        <!-- ============ 1. ANDROID VIEWS ============ -->
+
+        <TextView style="@style/Section" android:text="1 — Android Views (TextView)" />
+
+        <TextView style="@style/Label" android:text="Arabic-first, default textDirection — CORRECT" />
+        <TextView style="@style/Sample" android:text="@string/short_arabic_first" />
+
+        <TextView style="@style/Label" android:text="Latin-first, default textDirection (firstStrong) — DEFECT" />
+        <TextView style="@style/Sample" android:text="@string/short_latin_first" />
+
+        <TextView style="@style/Label" android:text="Latin-first + android:textDirection=&quot;locale&quot; — MITIGATION" />
+        <TextView
+            style="@style/Sample"
+            android:textDirection="locale"
+            android:text="@string/short_latin_first" />
+
+        <!-- ============ 2. WRAPPING / PUNCTUATION / READING ORDER ============ -->
+
+        <TextView style="@style/Section" android:text="2 — Views, multi-clause (wrapping, 2nd Latin run, punctuation)" />
+
+        <TextView style="@style/Label" android:text="Arabic-first, default — CORRECT" />
+        <TextView style="@style/Sample" android:text="@string/long_arabic_first" />
+
+        <TextView style="@style/Label" android:text="Latin-first, default — DEFECT: compare where FedEx, the comma and the final full stop land" />
+        <TextView style="@style/Sample" android:text="@string/long_latin_first" />
+
+        <TextView style="@style/Label" android:text="Latin-first + textDirection=&quot;locale&quot; — MITIGATION" />
+        <TextView
+            style="@style/Sample"
+            android:textDirection="locale"
+            android:text="@string/long_latin_first" />
+
+        <!-- ============ 3. EDITABLE VIEW ============ -->
+
+        <TextView style="@style/Section" android:text="3 — EditText (alignment vs caret)" />
+
+        <TextView style="@style/Label" android:text="Latin-first, default — DEFECT: tap at the end; caret and text sit on opposite sides" />
+        <EditText
+            style="@style/SampleEdit"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:text="@string/short_latin_first" />
+
+        <TextView style="@style/Label" android:text="Latin-first + textDirection=&quot;locale&quot; — MITIGATION" />
+        <EditText
+            style="@style/SampleEdit"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:textDirection="locale"
+            android:text="@string/short_latin_first" />
+
+        <!-- ============ 4. JETPACK COMPOSE ============ -->
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- ============ 5. WEBVIEW ============ -->
+
+        <TextView style="@style/Section" android:text="5 — WebView / CSS" />
+
+        <TextView style="@style/Label" android:text="dir=&quot;auto&quot; on Latin-first content — DEFECT (the Gemini answer surface case)" />
+        <WebView
+            android:id="@+id/web_auto"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+
+        <TextView style="@style/Label" android:text="dir=&quot;rtl&quot; on the same content — MITIGATION" />
+        <WebView
+            android:id="@+id/web_rtl"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+
+    </LinearLayout>
+</ScrollView>

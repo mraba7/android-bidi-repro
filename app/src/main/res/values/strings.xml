@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BiDi Repro</string>
+
+    <!--
+      CONTROLLED PAIRS.
+
+      In each pair the two strings share a byte-identical tail. They differ ONLY
+      by the leading Arabic word "شركة " present in the *_arabic_first variant.
+      The single variable under test is therefore the first strong character.
+
+      short_*  : single line  -> paragraph direction, alignment, caret position
+      long_*   : two clauses  -> line wrapping, reading order of a second Latin
+                                run (FedEx), placement of the comma and of the
+                                sentence-final full stop
+    -->
+
+    <string name="short_arabic_first">شركة DHL هي أقدم وأقوى شركة شحن سريع في الشرق الأوسط</string>
+    <string name="short_latin_first">DHL هي أقدم وأقوى شركة شحن سريع في الشرق الأوسط</string>
+
+    <string name="long_arabic_first">شركة DHL هي أقدم وأقوى شركة شحن سريع في الشرق الأوسط، ويتم التسليم في غضون ساعات. في المقابل، شبكة FedEx في المنطقة أصغر لكنها غالباً أسرع في التخليص الجمركي.</string>
+    <string name="long_latin_first">DHL هي أقدم وأقوى شركة شحن سريع في الشرق الأوسط، ويتم التسليم في غضون ساعات. في المقابل، شبكة FedEx في المنطقة أصغر لكنها غالباً أسرع في التخليص الجمركي.</string>
+</resources>
